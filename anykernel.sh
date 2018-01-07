@@ -4,7 +4,7 @@
 ## AnyKernel setup
 # begin properties
 properties() {
-kernel.string=Nexus 6P Angler kernel by @savagezen
+kernel.string=Nexus 6P Angler Kernel
 do.devicecheck=1
 do.modules=0
 do.cleanup=1
@@ -30,6 +30,13 @@ is_slot_device=0;
 chmod -R 750 $ramdisk/*;
 chown -R root:root $ramdisk/*;
 
+## Alert of unsupported Android version
+android_ver=$(mount /system; grep "^ro.build.version.release" /system/build.prop | cut -d= -f2; umount /system);
+case "$android_ver" in
+  "7.0"|"7.1"|"7.1.1"|"7.1.2"|"8.0.0") compatibility_string="your version is unsupported, expect no support!";;
+  "8.1.0") compatibility_string="your version is supported!";;
+esac;
+ui_print "Running Android $android_ver, $compatibility_string";
 
 ## AnyKernel install
 dump_boot;
