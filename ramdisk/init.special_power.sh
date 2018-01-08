@@ -1,4 +1,5 @@
 #!/system/bin/sh
+# from Flash Kernel by @nathanchance
 
 ################################################################################
 # helper functions to allow Android init like script

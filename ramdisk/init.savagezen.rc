@@ -2,7 +2,7 @@
 # Pieces taken from @anarkia1976, @franciscofranco, @frap129, and @flar2
 
 # Import Spectrum profiles
-#import /init.profiles.rc
+import /init.profiles.rc
 
 on property:sys.boot_completed=1
     # according to Qcom this legacy value improves first launch latencies
@@ -41,6 +41,7 @@ on property:sys.boot_completed=1
     write /sys/block/mmcblk0/queue/rotational 0
 
     # Special power script - executes three times under different SELinux contexts
+    # from Flash Kernel by @nathanchance
     exec u:r:init:s0 root root -- /init.special_power.sh
     exec u:r:su:s0 root root -- /init.special_power.sh
     exec u:r:supersu:s0 root root -- /init.special_power.sh
