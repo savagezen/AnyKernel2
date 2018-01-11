@@ -27,9 +27,11 @@ on property:persist.spectrum.profile=1
 
 # Balance v1 by savagezen
 on property:persist.spectrum.profile=0
-   # I/O Scheduler Settings
+   # I/O Scheduler Settings v1.0
    write /sys/block/mmcblk0/queue/scheduler noop
    write /sys/block/mmcblk0/queue/read_ahead_kb 5120
+#v2.0   write /sys/block/mmcblk0/queue/scheduler fiops
+#v2.0   write /sys/block/mmcblk0/queue/read_ahead_kb 512
    # Virtual Memory Settings
    sysctl -w vm.min_free_kbytes 24860
    sysctl -w vm.extra_free_kbytes 43200
@@ -38,11 +40,13 @@ on property:persist.spectrum.profile=0
    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1555000
    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 384000
    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq 1958000
+#v2.0      write /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq 633000
    # Force cores #6 and #7 offline
    write /sys/module/msm_performance/parameters/max_cpus "-1:2"
    # Little values
    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 0
+#v2.0   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 72
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay 35000
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 50000
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack -1
@@ -57,12 +61,15 @@ on property:persist.spectrum.profile=0
    # Big values
    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor interactive
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load 0
+#v2.0   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load 99
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay 35000
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate 20000
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq 384000
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack -1
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads "633000:99 768000:90 864000:92 960000:11 1248000:30 1344000:8 1440000:7 1536000:7 1632000:6 1728000:6 1824000:6 1958000:7"
+#v2.0   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads "633000:99"
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 80000
+#v2.0      write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 80000
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/align_windows 0
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_migration_notif 1
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_sched_load 0
@@ -74,7 +81,9 @@ on property:persist.spectrum.profile=0
    write /sys/module/cpu_boost/parameters/input_boost_ms 0
    # Other values
    write /sys/module/msm_performance/parameters/touchboost 0
-   write /sys/class/kgsl/kgsl-3d0/devfreq/governor powersave
+#v1.0   write /sys/class/kgsl/kgsl-3d0/devfreq/governor powersave
+   write /sys/class/kgsl/kgsl-3d0/devfreq/governor simple_ondemand
+   write /sys/class/kgsl/kgsl-3d0/devfreq/max_freq 390000000
    write /sys/class/leds/lcd-backlight/max_brightness 90
    write /dev/cpuset/foreground/cpus 0-2,4-5
    write /dev/cpuset/foreground/boost/cpus 4-5
