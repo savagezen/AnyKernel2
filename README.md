@@ -54,14 +54,15 @@ insert_file <file> <if search string> <before|after> <line match string> <patch 
 append_file <file> <if search string> <patch file>
 replace_file <file> <permissions> <patch file>
 patch_fstab <fstab file> <mount match name> <fs match type> <block|mount|fstype|options|flags> <original string> <replacement string>
-patch_cmdline <cmdline match string> [<replacement string>]
+patch_cmdline <cmdline entry name> <replacement string>
 patch_prop <prop file> <prop name> <new prop value>
 repack_ramdisk
 flash_boot
 write_boot
+reset_ak
 ```
 
-__"if search string"__ is the string it looks for to decide whether it needs to add the tweak or not, so generally something to indicate the tweak already exists. __"cmdline match string"__ behaves somewhat like this while also being the new cmdline addition for the _patch_cmdline_ function. __"prop name"__ also serves as a match check for a property in the given prop file, but is only the prop name as the prop value is specified separately.
+__"if search string"__ is the string it looks for to decide whether it needs to add the tweak or not, so generally something to indicate the tweak already exists. __"cmdline entry name"__ behaves somewhat like this as a match check for the name of the cmdline entry to be changed/added by the _patch_cmdline_ function, followed by the full entry to replace it. __"prop name"__ also serves as a match check in _patch_prop_ for a property in the given prop file, but is only the prop name as the prop value is specified separately.
 
 Similarly, __"line match string"__ and __"line replace string"__ are the search strings that locate where the modification needs to be made for those commands, __"begin search string"__ and __"end search string"__ are both required to select the first and last lines of the script block to be replaced for _replace_section_, and __"mount match name"__ and __"fs match type"__ are both required to narrow the _patch_fstab_ command down to the correct entry.
 
@@ -80,12 +81,17 @@ The AK2 repo includes my latest static ARM builds of `mkbootimg`, `unpackbootimg
 https://forum.xda-developers.com/showthread.php?t=2073775 (Android Image Kitchen thread)  
 https://forum.xda-developers.com/showthread.php?t=2239421 (Odds and Ends thread)
 
+Or as linked, here:
+
+https://forum.xda-developers.com/xperia-j-e/development/arm-elftool-pack-unpack-boot-image-sony-t2146022 (ElfTool)
+
 Optional supported binaries which may be placed in /tools to enable built-in expanded functionality are as follows:
 * `mkbootfs` - for broken recoveries, or, booted flash support for a script or app via bind mounting to a /tmp directory
 * `flash_erase`, `nanddump`, `nandwrite` - MTD block device support for devices where the `dd` command is not sufficient
 * `pxa-unpackbootimg`, `pxa-mkbootimg` - Samsung/Marvell PXA1088/PXA1908 boot.img format variant support
 * `dumpimage`, `mkimage` - DENX U-Boot uImage format support
 * `unpackelf` - Sony ELF kernel.elf format support, repacking as AOSP standard boot.img for unlocked bootloaders
+* `elftool`, `unpackelf` - Sony ELF kernel.elf format support, repacking as ELF for older Sony devices
 * `mkmtkhdr` - MTK device boot image section headers support
 * `futility` + `chromeos` test keys directory - Google ChromeOS signature support
 * `BootSignature_Android.jar` + `avb` keys directory - Google Android Verified Boot (AVB) signature support
@@ -101,7 +107,7 @@ Optional supported binaries which may be placed in /tools to enable built-in exp
 
 3. Place any required patch files (generally partial files which go with commands) in /patch
 
-4. Modify the anykernel.sh to add your kernel's name, boot partition location, permissions for included ramdisk files, and use methods for any required ramdisk modifications
+4. Modify the anykernel.sh to add your kernel's name, boot partition location, permissions for included ramdisk files, and use methods for any required ramdisk modifications (optionally, also place banner and/or version files in the root to have these displayed during flash)
 
 5. `zip -r9 UPDATE-AnyKernel2.zip * -x README UPDATE-AnyKernel2.zip`
 
