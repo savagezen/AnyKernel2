@@ -44,7 +44,7 @@ dump_boot;
 # begin ramdisk changes
 
 # init.savagezen.rc
-insert_line init.angler.rc "init.savagezen.rc" after "import.angler.sensorhub.rc" "import init.savagezen.rc";
+insert_line init.angler.rc "init.savagezen.rc" after "import init.angler.sensorhub.rc" "import init.savagezen.rc";
 
 # init.rc
 #backup_file init.rc;
