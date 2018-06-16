@@ -1,29 +1,31 @@
 # AnyKernel2 Ramdisk Mod Script
 # osm0sis @ xda-developers
+# parts taken from Flash Kenrel by @nathanchance
+# parts taken from Fraco Kernel by @franciscofranco
 
 ## AnyKernel setup
 # begin properties
-properties() {
+properties() { '
 kernel.string=Nexus 6P Angler Kernel
 do.devicecheck=1
 do.modules=0
 do.cleanup=1
-do.cleanuponabort=0
+do.cleanuponabort=1
 device.name1=angler
 device.name2=Angler
 device.name3=
 device.name4=
 device.name5=
-} # end properties
+'; } # end properties
 
 # shell variables
 block=/dev/block/platform/soc.0/f9824900.sdhci/by-name/boot;
 is_slot_device=0;
+ramdisk_compression=auto;
 
 ## AnyKernel methods (DO NOT CHANGE)
 # import patching functions/variables - see for reference
 . /tmp/anykernel/tools/ak2-core.sh;
-
 
 ## AnyKernel file attributes
 # set permissions/ownership for included ramdisk files
@@ -43,25 +45,20 @@ dump_boot;
 
 # begin ramdisk changes
 
-# init.savagezen.rc
-insert_line init.angler.rc "init.savagezen.rc" after "import init.angler.sensorhub.rc" "import init.savagezen.rc";
+# fstab.angler
+insert_line fstab.angler "data           f2fs" after "data           ext4" "/dev/block/platform/soc.0/f9824900.sdhci/by-name/userdata     /data           
+f2fs    rw,nosuid,nodev,noatime,nodiratime,inline_xattr 
+wait,formattable,encryptable=/dev/block/platform/soc.0/f9824900.sdhci/by-name/metadata";
+insert_line fstab.angler "cache          f2fs" after "cache          ext4" "/dev/block/platform/soc.0/f9824900.sdhci/by-name/cache        
+/cache          f2fs    rw,nosuid,nodev,noatime,nodiratime,inline_xattr wait,check,formattable";
+patch_fstab fstab.angler none swap flags "zramsize=533413200" "zramsize=1066826400";
+patch_fstab fstab.angler /system ext4 flags "wait,verify=/dev/block/platform/soc.0/f9824900.sdhci/by-name/metadata" "wait";
+patch_fstab fstab.angler /vendor ext4 flags "wait,verify=/dev/block/platform/soc.0/f9824900.sdhci/by-name/metadata" "wait";
+patch_fstab fstab.angler /data ext4 flags "wait,check,forcefdeorfbe=/dev/block/platform/soc.0/f9824900.sdhci/by-name/metadata" "wait,check,encryptable=/dev/block/platform/soc.0/f9824900.sdhci/by-name/metadata";
 
 # init.rc
-#backup_file init.rc;
-#replace_string init.rc "cpuctl cpu,timer_slack" "mount cgroup none /dev/cpuctl cpu" "mount cgroup none /dev/cpuctl cpu,timer_slack";
-#append_file init.rc "run-parts" init;
-
-# init.tuna.rc
-#backup_file init.tuna.rc;
-#insert_line init.tuna.rc "nodiratime barrier=0" after "mount_all /fstab.tuna" "\tmount ext4 /dev/block/platform/omap/omap_hsmmc.0/by-name/userdata /data remount nosuid nodev noatime nodiratime barrier=0";
-#append_file init.tuna.rc "dvbootscript" init.tuna;
-
-# fstab.tuna
-#backup_file fstab.tuna;
-#patch_fstab fstab.tuna /system ext4 options "noatime,barrier=1" "noatime,nodiratime,barrier=0";
-#patch_fstab fstab.tuna /cache ext4 options "barrier=1" "barrier=0,nomblk_io_submit";
-#patch_fstab fstab.tuna /data ext4 options "data=ordered" "nomblk_io_submit,data=writeback";
-#append_file fstab.tuna "usbdisk" fstab;
+#insert_line init.angler.rc "init.fk.rc" after "import init.angler.sensorhub.rc" "import init.fk.rc";
+#insert_line init.angler.rc "performance_profiles" after "import init.angler.sensorhub.rc" "import init.performance_profiles.rc";
 
 # end ramdisk changes
 
