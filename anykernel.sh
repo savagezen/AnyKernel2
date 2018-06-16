@@ -59,7 +59,6 @@ patch_fstab fstab.angler /data ext4 flags "wait,check,forcefdeorfbe=/dev/block/p
 # init.rc
 insert_line init.angler.rc "init.fk.rc" after "import init.angler.sensorhub.rc" "import init.fk.rc";
 insert_line init.angler.rc "performance_profiles" after "import init.angler.sensorhub.rc" "import init.performance_profiles.rc";
-#insert_line init.angler.rc "init.sz" after "import init.angler.sensorhub.rc" "import init.sz.rc";
 
 # end ramdisk changes
 
