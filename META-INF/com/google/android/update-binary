@@ -68,9 +68,11 @@ ui_print "$(file_getprop /tmp/anykernel/anykernel.sh kernel.string)";
 if [ -f /tmp/anykernel/version ]; then
   ui_print " ";
   ui_print "$(cat /tmp/anykernel/version)";
-  ui_print "by Austin Haedicke @savagezen";
+  ui_print " ";
   ui_print " ";
 fi;
+ui_print " ";
+ui_print "by Austin Haedicke @savagezen";
 ui_print " ";
 ui_print "made with:";
 ui_print "- AnyKernel2 by @osm0sis";

@@ -57,8 +57,9 @@ patch_fstab fstab.angler /vendor ext4 flags "wait,verify=/dev/block/platform/soc
 patch_fstab fstab.angler /data ext4 flags "wait,check,forcefdeorfbe=/dev/block/platform/soc.0/f9824900.sdhci/by-name/metadata" "wait,check,encryptable=/dev/block/platform/soc.0/f9824900.sdhci/by-name/metadata";
 
 # init.rc
-#insert_line init.angler.rc "init.fk.rc" after "import init.angler.sensorhub.rc" "import init.fk.rc";
-#insert_line init.angler.rc "performance_profiles" after "import init.angler.sensorhub.rc" "import init.performance_profiles.rc";
+insert_line init.angler.rc "init.fk.rc" after "import init.angler.sensorhub.rc" "import init.fk.rc";
+insert_line init.angler.rc "performance_profiles" after "import init.angler.sensorhub.rc" "import init.performance_profiles.rc";
+#insert_line init.angler.rc "init.sz" after "import init.angler.sensorhub.rc" "import init.sz.rc";
 
 # end ramdisk changes
 
