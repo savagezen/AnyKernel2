@@ -57,8 +57,14 @@ patch_fstab fstab.angler /vendor ext4 flags "wait,verify=/dev/block/platform/soc
 patch_fstab fstab.angler /data ext4 flags "wait,check,forcefdeorfbe=/dev/block/platform/soc.0/f9824900.sdhci/by-name/metadata" "wait,check,encryptable=/dev/block/platform/soc.0/f9824900.sdhci/by-name/metadata";
 
 # init.rc
-insert_line init.angler.rc "init.fk.rc" after "import init.angler.sensorhub.rc" "import init.fk.rc";
-insert_line init.angler.rc "performance_profiles" after "import init.angler.sensorhub.rc" "import init.performance_profiles.rc";
+insert_line init.angler.rc "init.sz.rc" after "import init.angler.sensorhub.rc" "import init.sz.rc";
+insert_line init.angler.rc "init.spectrum.rc" after "import init.angler.sensorhub.rc" "import init.spectrum.rc";
+insert_line init.angler.rc "init.spectrum.sh" after "import init.angler.sensorhub.rc" "import init.spectrum.sh";
+replace_string init.angler.rc "#    verity_load_state" "    verity_load_state" "#    verity_load_state";
+replace_string init.angler.rc "#    verity_update_state" "    verity_update_state" "#    verity_update_state";
+replace_section init.angler.rc "service atfwd" " " "service atfwd /system/bin/ATFWD-daemon\n    disabled\n    class late_start\n    user system\n    group system radio\n";
+
+$bin/sepolicy-inject -s init -t rootfs -c file -p execute_no_trans -P sepolicy;
 
 # end ramdisk changes
 
