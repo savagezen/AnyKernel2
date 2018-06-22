@@ -8,7 +8,7 @@ if [ ! -f /data/property/persist.spectrum.profile ]; then
 fi
 
 ## Profiles available in Spectrum app:
-# 0 - Balance v1.1 by savagezen (default)
+# 0 - Balance v1.2 by savagezen (default)
 # 1 - Performance v2.2 by savagezen
 # 2 - Battery v1.3 by savagezen
 # 3 - Gaming v1 by savagezen

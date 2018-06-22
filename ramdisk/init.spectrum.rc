@@ -13,7 +13,7 @@ on property:sys.boot_completed=1
    # Add kernel name
    setprop persist.spectrum.kernel savagezen
 
-# Balance v1.1 by savagezen (default profile)
+# Balance v1.2 by savagezen (default profile)
 on property:persist.spectrum.profile=0
    # Frequency values
    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
@@ -24,13 +24,13 @@ on property:persist.spectrum.profile=0
    write /sys/module/msm_performance/parameters/max_cpus "-1:-1"
    # Little values
    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
-   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 73
-   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay 350000
+   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 99
+   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay 35000
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 50000
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 384000
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack -1
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "460000:92 600000:92 672000:90 768000:14 864000:90 960000:90 1248000:99 1344000:90 1478000:10 1555000:99"
-   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 80000
+   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 60000
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/align_windows 0
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif 1
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load 0
