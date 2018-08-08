@@ -71,13 +71,14 @@ if [ -f /tmp/anykernel/version ]; then
   ui_print " ";
   ui_print " ";
 fi;
-ui_print " ";
 ui_print "by Austin Haedicke @savagezen";
 ui_print " ";
-ui_print "made with:";
-ui_print "- AnyKernel2 by @osm0sis";
-ui_print "- parts from Flash Kernel by @nathanchance";
-ui_print "- parts from Franco Kernel by @franciscofranco";
+ui_print "Thanks: ";
+ui_print "@osm0sis";
+ui_print "@nathanchance";
+ui_print "@franciscofranco";
+ui_print "@frap129";
+ui_print "@audiogod";
 ui_print " ";
 ui_print " ";
 
