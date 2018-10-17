@@ -85,8 +85,13 @@ on property:sys.boot_completed=1
     write /sys/module/msm_thermal/core_control/enabled 1
     write /sys/module/msm_thermal/parameters/enabled 0
 
-    # Enable Fingerprint boost
+    # enable fingerprint boost
     write /sys/kernel/fp_boost/enabled 1
+
+    # disable some wlan wakelocks (Electron Kernel)
+    write /sys/module/wakeup/parameters/enable_wlan_rx_wake_ws 0
+    write /sys/module/wakeup/parameters/enable_wlan_ctrl_wake_ws 0
+    write /sys/module/wakeup/parameters/enable_wlan_wake_ws 0
 
     # misc
     write /proc/sys/vm/swappiness 100
