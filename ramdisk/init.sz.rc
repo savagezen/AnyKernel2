@@ -83,7 +83,6 @@ on property:sys.boot_completed=1
 
     # misc
     write /proc/sys/vm/swappiness 100
-    write /sys/module/lowmemorykiller/parameters/minfree "18432,23040,27648,32256,36864,46080"
     # Franco Kernel Default vibration strength - now per-profile
     # write /sys/class/timed_output/vibrator/vmax_mv_strong 1250
 

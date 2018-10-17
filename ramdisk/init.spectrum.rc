@@ -13,7 +13,7 @@ on property:sys.boot_completed=1
    # Add kernel name
    setprop persist.spectrum.kernel savagezen
 
-# Balance v1.3 by savagezen (default profile)
+# Balance v1.4 by savagezen (default profile)
 on property:persist.spectrum.profile=0
    # Frequency values
    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
@@ -60,13 +60,15 @@ on property:persist.spectrum.profile=0
    write /sys/class/kgsl/kgsl-3d0/devfreq/max_freq 390000000
    write /sys/block/mmcblk0/queue/read_ahead_kb 1024
    write /sys/block/mmcblk0/queue/scheduler noop
-   # 20% vibration strength
+   # vibration strength 20%
    write /sys/class/timed_output/vibrator/vmax_mv_strong 812
    write /sys/devices/virtual/timed_output/vibrator/vmax_mv_light 512
    # LMK - franco kernel default
    write /sys/module/lowmemorykiller/parameters/minfree "18432,23040,27648,32256,36864,46080"
+   # brightness 80%
+   write /sys/class/leds/lcd-backlight/max_brightness 180
 
-# Performance v2.3 by savagezen
+# Performance v2.4 by savagezen
 on property:persist.spectrum.profile=1
    # Frequency values
    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
@@ -110,13 +112,15 @@ on property:persist.spectrum.profile=1
    write /sys/class/kgsl/kgsl-3d0/devfreq/max_freq 390000000
    write /sys/block/mmcblk0/queue/scheduler fiops
    write /sys/block/mmcblk0/queue/read_ahead_kb 5120
-   # 33% vibration strength
+   # vibration strength 33%
    write /sys/class/timed_output/vibrator/vmax_mv_strong 1264
    write /sys/devices/virtual/timed_output/vibrator/vmax_mv_light 1264
    # LMK - aggressive kernel auditor preset
    write /sys/module/lowmemerykiller/parameters/minfree "14330,21495,42990,100310,107475"
+   # brightness 100%
+   write /sys/class/leds/lcd-backlight/max_brightness 225
 
-# Battery v1.4 by savagezen
+# Battery v1.5 by savagezen
 on property:persist.spectrum.profile=2
    # Frequency values
    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
@@ -164,11 +168,13 @@ on property:persist.spectrum.profile=2
    write /sys/class/kgsl/kgsl-3d0/devfreq/max_freq 180000000
    write /sys/block/mmcblk0/queue/scheduler noop
    write /sys/block/mmcblk0/queue/read_ahead_kb 128
-   # 20% vibration strength
+   # vibration strength 20%
    write /sys/class/timed_output/vibrator/vmax_mv_strong 812
    write /sys/devices/virtual/timed_output/vibrator/vmax_mv_light 512
    # LMK - franco kernel default
    write /sys/module/lowmemorykiller/parameters/minfree "18432,23040,27648,32256,36864,46080"
+   # brightness 40%
+   write /sys/class/leds/lcd-backlight/max_brightness 100
 
 # Gaming v1.1 by savagezen (based on Flash Kernel / Gaming by nathanchance)
 on property:persist.spectrum.profile=3
@@ -210,11 +216,13 @@ on property:persist.spectrum.profile=3
    write /sys/module/cpu_boost/parameters/input_boost_ms 1500
    write /sys/block/mmcblk0/queue/scheduler fiops
    write /sys/block/mmcblk0/queue/read_ahead_kb 5120
-   # 50% vibration strength
+   # vibration strength 50%
    write /sys/class/timed_output/vibrator/vmax_mv_strong 1856
    write /sys/devices/virtual/timed_output/vibrator/vmax_mv_light 1556
    # LMK- very light foreground and visible, aggressive others
    write /sys/module/lowmemerykiller/parameters/minfree "7165,14330,42990,100310,107475"
+   # brightness 100%
+   write /sys/class/leds/lcd-backlight/max_brightness 255
 
 # Balance by nathanchance (Flash Kernel)
 # Governor settings by phantom146: GlassCannon
