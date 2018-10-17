@@ -86,9 +86,9 @@ on property:sys.boot_completed=1
     # Franco Kernel Default vibration strength - now per-profile
     # write /sys/class/timed_output/vibrator/vmax_mv_strong 1250
 
-    # Disable core control, enable msm_thermal
-    write /sys/module/msm_thermal/core_control/enabled 0
-    write /sys/module/msm_thermal/parameters/enabled 1
+    # enable core control, disable msm_thermal
+    write /sys/module/msm_thermal/core_control/enabled 1
+    write /sys/module/msm_thermal/parameters/enabled 0
 
     # Enable Fingerprint boost
     write /sys/kernel/fp_boost/enabled 1
