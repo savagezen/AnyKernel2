@@ -111,8 +111,8 @@ on property:persist.spectrum.profile=1
    write /sys/block/mmcblk0/queue/scheduler fiops
    write /sys/block/mmcblk0/queue/read_ahead_kb 5120
    # 33% vibration strength
-   write /sys/class/timed_output/vibrator/vmax_mv_strong 116
-   write /sys/devices/virtual/timed_output/vibrator/vmax_mv_light 116
+   write /sys/class/timed_output/vibrator/vmax_mv_strong 1264
+   write /sys/devices/virtual/timed_output/vibrator/vmax_mv_light 1264
    # LMK - aggressive kernel auditor preset
    write /sys/module/lowmemerykiller/parameters/minfree "14330,21495,42990,100310,107475"
 
