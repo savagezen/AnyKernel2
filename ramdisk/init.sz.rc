@@ -1,3 +1,14 @@
+# initialization script
+# Pieces taken from @nathanchance, @anarkia1976, @franciscofranco, @frap129, @xcnathan32, and @flar2
+
+on boot
+    # disable big cores to try to prevent BLOD
+    write /dev/cpuset/foreground/cpus 0-3
+    write /dev/cpuset/foreground/boost/cpus 0-3
+    write /dev/cpuset/background/cpus 3
+    write /dev/cpuset/system-background/cpus 2-3
+    write /dev/cpuset/top-app/cpus 0-3
+
 on late-fs
     # boot time fs tune
     write /sys/block/mmcblk0/queue/iostats 0
