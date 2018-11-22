@@ -3,7 +3,7 @@
 
 ## AnyKernel setup
 # EDIFY properties
-kernel.rel=testing-20181101-14
+kernel.rel=testing-20181101-16
 do.devicecheck=1
 do.initd=0
 do.modules=0
@@ -220,7 +220,7 @@ chmod -R 755 $ramdisk
 ## AnyKernel install
 dump_boot;
 # Start ramdisk changes
-insert_line init.angler.rc "init.electron.rc" after "import init.angler.sensorhub.rc" "import init.electron.rc";
+insert_line init.angler.rc "init.sz.rc" after "import init.angler.sensorhub.rc" "import init.sz.rc";
 
 # Add frandom compatibility
 backup_file ueventd.rc;

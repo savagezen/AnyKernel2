@@ -35,13 +35,20 @@ fi;
 chmod -R 755 /tmp/anykernel/tools /tmp/anykernel/bin;
 bb=/tmp/anykernel/tools/busybox;
 
-ui_print "AnyKernel2 by osm0sis @ xda-developers";
 ui_print " ";
-ui_print "        Electron Kernel";
-ui_print "A simple kernel for the Nexus 6P";
-ui_print "           Release $(file_getprop /tmp/anykernel/anykernel.sh kernel.rel)";
+ui_print "        Nexus 6P Angler Kernel";
+ui_print "        Release $(file_getprop /tmp/anykernel/anykernel.sh kernel.rel)";
+ui_print " ";
+ui_print "        by Austin Haedicke @savagezen";
+ui_print " ";
+ui_print "Thanks:";
+ui_print "@osm0sis, @nathanchance, @flar2, frap129,";
+ui_print "@franciscofranco, @audiogod, @xcnathan32,";
+ui_print "@phantom146, @zx2c4";
 ui_print " ";
 ui_print " ";
+#ui_print "|------------- max line length -------------|";
+
 mount -o ro /system;
 mount /data;
 
