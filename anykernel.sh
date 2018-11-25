@@ -212,15 +212,25 @@ patch_fstab() {
 
 ## end methods
 
-
 ## AnyKernel permissions
 # set permissions for included files
 chmod -R 755 $ramdisk
 
+## Alert of unsupported Android version
+android_ver=$(mount /system; grep "^ro.build.version.release" /system/build.prop | cut -d= -f2; umount /system);
+case "$android_ver" in
+  "7.0"|"7.1"|"7.1.1"|"7.1.2"|"8.0.0") compatibility_string="your version is unsupported, expect no support!";;
+  "8.1.0") compatibility_string="your version is supported!";;
+esac;
+ui_print "Running Android $android_ver, $compatibility_string";
+
 ## AnyKernel install
 dump_boot;
+
 # Start ramdisk changes
 insert_line init.angler.rc "init.sz.rc" after "import init.angler.sensorhub.rc" "import init.sz.rc";
+insert_line init.angler.rc "init.spectrum.rc" after "import init.angler.sensorhub.rc" "import init.spectrum.rc";
+insert_line init.angler.rc "init.spectrum.sh" after "import init.angler.sensorhub.rc" "import init.spectrum.sh";
 
 # Add frandom compatibility
 backup_file ueventd.rc;
