@@ -20,6 +20,9 @@ on post-fs
     setprop ro.sys.sdcardfs true
 
 on property:sys.boot_completed=1
+    # keep selinux permissive
+    setenforce 0
+
     # Reset CPU cores to default
     write /dev/cpuset/foreground/cpus 0-2,4-7
     write /dev/cpuset/foreground/boost/cpus 4-7
