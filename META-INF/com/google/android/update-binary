@@ -44,7 +44,7 @@ ui_print " ";
 ui_print "Thanks:";
 ui_print "@osm0sis, @nathanchance, @flar2, frap129,";
 ui_print "@franciscofranco, @audiogod, @xcnathan32,";
-ui_print "@phantom146, @zx2c4";
+ui_print "@phantom146, @zx2c4, StatixOS";
 ui_print " ";
 ui_print " ";
 #ui_print "|------------- max line length -------------|";
